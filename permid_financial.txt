@@ -1,0 +1,374 @@
+# baseURI: http://permid.org/ontology/financial/
+# imports: http://permid.org/ontology/common/
+# imports: http://permid.org/ontology/currency/
+# imports: http://permid.org/ontology/organization/
+# imports: http://permid.org/ontology/tr-vcard/
+# imports: http://permid.org/ontology/trbc/
+# prefix: tr-fin
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix tr-common: <http://permid.org/ontology/common/> .
+@prefix tr-currency: <http://permid.org/ontology/currency/> .
+@prefix tr-fin: <http://permid.org/ontology/financial/> .
+@prefix tr-org: <http://permid.org/ontology/organization/> .
+@prefix trbc: <http://permid.org/ontology/trbc/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+tr-fin:
+  rdf:type owl:Ontology ;
+  rdfs:label "Thomson Reuters Open Perm ID financial ontology"@en ;
+  owl:imports tr-common: ;
+  owl:imports tr-currency: ;
+  owl:imports tr-org: ;
+  owl:imports <http://permid.org/ontology/tr-vcard/> ;
+  owl:imports trbc: ;
+.
+tr-fin:AssetClass
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Asset class"@en ;
+  rdfs:subClassOf skos:Concept ;
+.
+tr-fin:AssetClassScheme
+  rdf:type skos:ConceptScheme ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Asset class scheme"@en ;
+.
+tr-fin:Instrument
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Instrument"@en ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tr-common:hasName ;
+    ] ;
+.
+tr-fin:InstrumentStatus
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Instrument status"@en ;
+  rdfs:subClassOf skos:Concept ;
+.
+tr-fin:InstrumentStatusScheme
+  rdf:type skos:ConceptScheme ;
+  rdfs:comment "Instrument status." ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Instrument status scheme"@en ;
+  skos:hasTopConcept tr-fin:InstrumentStatusSuspended ;
+  skos:hasTopConcept tr-fin:instrumentStatusActive ;
+  skos:hasTopConcept tr-fin:instrumentStatusInactive ;
+.
+tr-fin:InstrumentStatusSuspended
+  rdf:type tr-fin:InstrumentStatus ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Suspended"@en ;
+.
+tr-fin:OptionType
+  rdf:type owl:Class ;
+  rdfs:comment "Call or Put"@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Option type"@en ;
+  rdfs:subClassOf skos:Concept ;
+.
+tr-fin:OptionTypeScheme
+  rdf:type skos:ConceptScheme ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Option type scheme"@en ;
+  skos:hasTopConcept tr-fin:optionTypeCall ;
+  skos:hasTopConcept tr-fin:optionTypePut ;
+.
+tr-fin:Quote
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Quote"@en ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tr-common:hasName ;
+    ] ;
+.
+tr-fin:QuoteStatus
+  rdf:type owl:Class ;
+  rdfs:comment "An indicator which defines whether a security is actively traded or delisted."@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Quote status"@en ;
+  rdfs:subClassOf skos:Concept ;
+.
+tr-fin:QuoteStatusScheme
+  rdf:type skos:ConceptScheme ;
+  rdfs:comment "A scheme of indicators which defines whether a security is actively traded or delisted."@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Quote status scheme"@en ;
+  skos:hasTopConcept tr-fin:quoteStatusActive ;
+  skos:hasTopConcept tr-fin:quoteStatusInactive ;
+  skos:hasTopConcept tr-fin:quoteStatusSuspended ;
+.
+tr-fin:QuoteType
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Quote type"@en ;
+  rdfs:subClassOf skos:Concept ;
+.
+tr-fin:QuoteTypeScheme
+  rdf:type skos:ConceptScheme ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Quote type scheme"@en ;
+  skos:hasTopConcept tr-fin:quoteTypeEvaluated ;
+  skos:hasTopConcept tr-fin:quoteTypeExecutable ;
+  skos:hasTopConcept tr-fin:quoteTypeFixing ;
+  skos:hasTopConcept tr-fin:quoteTypeIndicative ;
+.
+tr-fin:hasAssetClass
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain tr-fin:Instrument ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has asset class"@en ;
+  rdfs:range tr-fin:AssetClass ;
+.
+tr-fin:hasCFICode
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "ISO 10962 Classification of Financial Instruments."@en ;
+  rdfs:domain tr-fin:Instrument ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has CFI code"@en ;
+  rdfs:range xsd:string ;
+.
+tr-fin:hasExchangeCode
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Code indicating the exchange on which the quote is traded."@en ;
+  rdfs:domain tr-fin:Quote ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has exchange code"@en ;
+  rdfs:range xsd:string ;
+.
+tr-fin:hasExchangeTicker
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-fin:Quote ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has exchange ticker"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-fin:hasExpiryDate
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The agreed and predetermined final date on which an option or warrant can be bought (call) or sold (put)."@en ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          tr-fin:Instrument
+          tr-fin:Quote
+        ) ;
+    ] ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has expiry date"@en ;
+  rdfs:range xsd:dateTime ;
+.
+tr-fin:hasInstrumentStatus
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "An indicator which defines whether a security has any active quotes. Varies over time."@en ;
+  rdfs:domain tr-fin:Instrument ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has instrument status"@en ;
+  rdfs:range tr-fin:InstrumentStatus ;
+.
+tr-fin:hasMic
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-fin:Quote ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has market identification code"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-fin:hasOptionType
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-fin:Quote ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has option type"@en ;
+  rdfs:range tr-fin:OptionType ;
+.
+tr-fin:hasOrganizationPrimaryQuote
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has organization primary quote"@en ;
+  rdfs:range tr-fin:Quote ;
+.
+tr-fin:hasPrimaryInstrument
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has primary instrument"@en ;
+  rdfs:range tr-fin:Instrument ;
+  owl:inverseOf tr-fin:isPrimarySecurityOf ;
+.
+tr-fin:hasPrimaryQuote
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-fin:Instrument ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has primary quote"@en ;
+  rdfs:range tr-fin:Quote ;
+.
+tr-fin:hasQuoteStatus
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-fin:Quote ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has quote status"@en ;
+  rdfs:range tr-fin:QuoteStatus ;
+.
+tr-fin:hasQuoteType
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-fin:Quote ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has quote type"@en ;
+  rdfs:range tr-fin:QuoteType ;
+.
+tr-fin:hasRic
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-fin:Quote ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has Reuters Instrument Code (RIC)"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-fin:hasStrikePrice
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The agreed predetermined price of the underlying asset at which the option owner can exercise the option before expiry - the price at which the agreement was struck. Also known as the exercise price."@en ;
+  rdfs:domain tr-fin:Quote ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has strike price"@en ;
+  rdfs:range xsd:string ;
+.
+tr-fin:hasStrikePriceMultiplier
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Scaling factor defined for the options strike price."@en ;
+  rdfs:domain tr-fin:Quote ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has strike price multiplier"@en ;
+  rdfs:range xsd:string ;
+.
+tr-fin:hasUnderlyingInstrument
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-fin:Instrument ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has underlying instrument"@en ;
+  rdfs:range tr-fin:Instrument ;
+.
+tr-fin:hasUnderlyingQuote
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Has underlying quote"@en ;
+  rdfs:range tr-fin:Quote ;
+.
+tr-fin:instrumentStatusActive
+  rdf:type tr-fin:InstrumentStatus ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Active"@en ;
+  skos:notation "AC" ;
+.
+tr-fin:instrumentStatusInactive
+  rdf:type tr-fin:InstrumentStatus ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Inactive"@en ;
+  skos:notation "DC" ;
+.
+tr-fin:instrumentStatusSuspended
+  rdf:type tr-fin:InstrumentStatus ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Suspended"@en ;
+.
+tr-fin:isIssuedBy
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Indicates the issuer of the fund."@en ;
+  rdfs:domain tr-fin:Instrument ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Is issued by"@en ;
+  rdfs:range tr-org:Organization ;
+.
+tr-fin:isQuoteOf
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-fin:Quote ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Is quote of"@en ;
+  rdfs:range tr-fin:Instrument ;
+.
+tr-fin:isQuotedIn
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Indicates the currency and instrument is traded in."@en ;
+  rdfs:domain tr-fin:Quote ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Is quoted in"@en ;
+  rdfs:range tr-currency:Currency ;
+.
+tr-fin:optionTypeCall
+  rdf:type tr-fin:OptionType ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Call"@en ;
+  skos:notation "CALL" ;
+.
+tr-fin:optionTypePut
+  rdf:type tr-fin:OptionType ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Put"@en ;
+  skos:notation "PUT" ;
+.
+tr-fin:quoteStatusActive
+  rdf:type tr-fin:QuoteStatus ;
+  rdfs:comment "Security has been issued and is actively traded"@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Active"@en ;
+.
+tr-fin:quoteStatusInactive
+  rdf:type tr-fin:QuoteStatus ;
+  rdfs:comment "Security is no longer traded because it has been delisted from a Stock Exchange or no longer quoted by a contributor"@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Inactive"@en ;
+.
+tr-fin:quoteStatusSuspended
+  rdf:type tr-fin:QuoteStatus ;
+  rdfs:comment "Indicates whether a quote is suspended from trading by the Exchange."@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Suspended"@en ;
+.
+tr-fin:quoteTypeEvaluated
+  rdf:type tr-fin:QuoteType ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Evaluated"@en ;
+.
+tr-fin:quoteTypeExecutable
+  rdf:type tr-fin:QuoteType ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Executable"@en ;
+.
+tr-fin:quoteTypeFixing
+  rdf:type tr-fin:QuoteType ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Fixing"@en ;
+.
+tr-fin:quoteTypeIndicative
+  rdf:type tr-fin:QuoteType ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-fin: ;
+  rdfs:label "Indicative"@en ;
+.

@@ -1,0 +1,629 @@
+# baseURI: http://permid.org/ontology/organization/
+# imports: http://permid.org/ontology/common/
+# imports: http://permid.org/ontology/tr-vcard/
+# imports: http://permid.org/ontology/trbc/
+# prefix: tr-org
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix tr-common: <http://permid.org/ontology/common/> .
+@prefix tr-org: <http://permid.org/ontology/organization/> .
+@prefix trbc: <http://permid.org/ontology/trbc/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+tr-org:
+  rdf:type owl:Ontology ;
+  cc:attributionName "Thomson Reuters Open Perm ID"^^xsd:string ;
+  cc:attributionURL tr-org: ;
+  cc:license <http://creativecommons.org/licenses/by/4.0/> ;
+  rdfs:label "Thomson Reuters Open Perm ID organization ontology"@en ;
+  owl:imports tr-common: ;
+  owl:imports <http://permid.org/ontology/tr-vcard/> ;
+  owl:imports trbc: ;
+.
+tr-org:HoldingClassification
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Holding classification"@en ;
+  rdfs:subClassOf skos:Concept ;
+.
+tr-org:Organization
+  rdf:type owl:Class ;
+  rdfs:comment "Corporate, government, or private business entity engaged in the operation, administration, exchange, supply, regulation or advisory of a specific purpose."@en ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Organization"@en ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tr-org:hasPrimaryIndustryGroup ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://www.w3.org/2006/vcard/ns#hasURL> ;
+    ] ;
+.
+tr-org:OrganizationActivityStatus
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Organization activity status"@en ;
+  rdfs:subClassOf skos:Concept ;
+.
+tr-org:OrganizationType
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Organization type"@en ;
+  rdfs:subClassOf skos:Concept ;
+.
+tr-org:hasAKAName
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Alias name"@en ;
+  rdfs:label "Also known as name"@en ;
+  rdfs:label "Trading name"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf <http://www.w3.org/2006/vcard/ns#organization-name> ;
+.
+tr-org:hasAKANameNormalized
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has normalized AKAName"@en ;
+  rdfs:subPropertyOf tr-common:hasNormalizedName ;
+  rdfs:subPropertyOf tr-org:hasAKAName ;
+.
+tr-org:hasAKANameTransliterated
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has transliterated AKAName"@en ;
+  rdfs:subPropertyOf tr-common:hasTransliteratedName ;
+  rdfs:subPropertyOf tr-org:hasAKAName ;
+.
+tr-org:hasActivityStatus
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has activity status"@en ;
+  rdfs:range tr-org:OrganizationActivityStatus ;
+  rdfs:subPropertyOf tr-common:hasClassification ;
+.
+tr-org:hasCIK
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has CIK"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-org:hasCusip6
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has Cusip 6"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-org:hasDBAName
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has doing-business-as name"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf <http://www.w3.org/2006/vcard/ns#organization-name> ;
+.
+tr-org:hasDBANameNormalized
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has normalized doing-business-as name"@en ;
+  rdfs:subPropertyOf tr-common:hasNormalizedName ;
+  rdfs:subPropertyOf tr-org:hasDBAName ;
+.
+tr-org:hasDBANameTransliterated
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has transliterated doing-business-as name"@en ;
+  rdfs:subPropertyOf tr-common:hasTransliteratedName ;
+  rdfs:subPropertyOf tr-org:hasDBAName ;
+.
+tr-org:hasDateOfIncorporation
+  rdf:type owl:DatatypeProperty ;
+  rdf:type owl:FunctionalProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has incorporation date"@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          xsd:date
+          xsd:gYear
+        ) ;
+    ] ;
+.
+tr-org:hasEdcoid
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has EDCO ID"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-org:hasFKAName
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has formerly-known-as name"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf <http://www.w3.org/2006/vcard/ns#organization-name> ;
+.
+tr-org:hasFKANameNormalized
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has normalized formerly-known-as name"@en ;
+  rdfs:subPropertyOf tr-common:hasNormalizedName ;
+  rdfs:subPropertyOf tr-org:hasFKAName ;
+.
+tr-org:hasFKANameTransliterated
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has transliterated formerly-known-as name"@en ;
+  rdfs:subPropertyOf tr-common:hasTransliteratedName ;
+  rdfs:subPropertyOf tr-org:hasFKAName ;
+.
+tr-org:hasHeadquartersAddress
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has headquarters address"@en ;
+  rdfs:range <http://www.w3.org/2006/vcard/ns#Address> ;
+  rdfs:subPropertyOf <http://www.w3.org/2006/vcard/ns#hasAddress> ;
+.
+tr-org:hasHeadquartersFaxNumber
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has headquarters fax number"@en ;
+  rdfs:subPropertyOf tr-common:hasFaxNumber ;
+.
+tr-org:hasHeadquartersPhoneNumber
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has headquarters phone number"@en ;
+  rdfs:subPropertyOf tr-common:hasPhoneNumber ;
+.
+tr-org:hasHoldingClassification
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has holding classification"@en ;
+  rdfs:range tr-org:HoldingClassification ;
+  rdfs:subPropertyOf tr-common:hasClassification ;
+.
+tr-org:hasIPODate
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Date of initial public offering."^^xsd:string ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has IPO date"@en ;
+  rdfs:range xsd:dateTime ;
+.
+tr-org:hasImmediateParent
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Organization that has a direct majority holding in this organization"@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has immediate parent"@en ;
+  rdfs:range tr-org:Organization ;
+.
+tr-org:hasInactiveDate
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has inactive date"@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          xsd:date
+          xsd:gYear
+        ) ;
+    ] ;
+.
+tr-org:hasIndustryActivity
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "The organization is engaged in business or other activities that fall within the specified activity."@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has industry activity"@en ;
+  rdfs:range trbc:Activity ;
+.
+tr-org:hasIndustryGroup
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "The organization is engaged in business or other activities that fall within the specified industry group."@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has industry group"@en ;
+  rdfs:range trbc:IndustryGroup ;
+.
+tr-org:hasLEI
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has LEI"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-org:hasLegacyPI
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has legacy PI"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-org:hasMXID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has MX ID"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-org:hasNDAOrgID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has NDA organization ID"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-org:hasOfficialName
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The name typically used in legal documents, and in the organization's legal registration, if any."@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has official name"@en ;
+  rdfs:range rdfs:Literal ;
+  rdfs:subPropertyOf <http://www.w3.org/2006/vcard/ns#organization-name> ;
+.
+tr-org:hasOfficialNameNormalized
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has normalized official name"@en ;
+  rdfs:subPropertyOf tr-common:hasNormalizedName ;
+  rdfs:subPropertyOf tr-org:hasOfficialName ;
+.
+tr-org:hasOfficialNameTransliterated
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has transliterated official name"@en ;
+  rdfs:subPropertyOf tr-common:hasTransliteratedName ;
+  rdfs:subPropertyOf tr-org:hasOfficialName ;
+.
+tr-org:hasOrganizationFoundedDate
+  rdf:type owl:DatatypeProperty ;
+  rdf:type owl:FunctionalProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has organization founded date"@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          xsd:date
+          xsd:gYear
+        ) ;
+    ] ;
+.
+tr-org:hasOrganizationType
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has organization type"@en ;
+  rdfs:range tr-org:OrganizationType ;
+.
+tr-org:hasPrimaryCIK
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has primary CIK"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-org:hasCIK ;
+.
+tr-org:hasPrimaryCusip6
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has primary Cusip 6"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-org:hasCusip6 ;
+.
+tr-org:hasPrimaryIndustryActivity
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "Has primary industry activity"@en ;
+  rdfs:subPropertyOf tr-org:hasIndustryActivity ;
+.
+tr-org:hasPrimaryIndustryGroup
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "The organization is primarily engaged in business or other activities that fall within the specified industry group."@en ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has primary industry group"@en ;
+  rdfs:subPropertyOf tr-org:hasIndustryGroup ;
+.
+tr-org:hasPrimarySDCID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has primary SDC ID"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-org:hasSDCID ;
+.
+tr-org:hasPrimaryTMTCompanyID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has primary TMT Company ID"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-org:hasTMTCompanyID ;
+.
+tr-org:hasPrimaryVentureEconomicsID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has primary Venture Economics ID"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-org:hasVentureEconomicsID ;
+.
+tr-org:hasRCPID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has RCP ID"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-org:hasRegisteredAddress
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has registered address"@en ;
+  rdfs:range <http://www.w3.org/2006/vcard/ns#Address> ;
+  rdfs:subPropertyOf <http://www.w3.org/2006/vcard/ns#hasAddress> ;
+.
+tr-org:hasRegisteredFaxNumber
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has registered fax number"@en ;
+  rdfs:subPropertyOf tr-common:hasFaxNumber ;
+.
+tr-org:hasRegisteredPhoneNumber
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has registered phone number"@en ;
+  rdfs:subPropertyOf tr-common:hasPhoneNumber ;
+.
+tr-org:hasSDCID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has SDC ID"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-org:hasShortName
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has short name"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf <http://www.w3.org/2006/vcard/ns#organization-name> ;
+.
+tr-org:hasShortNameNormalized
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has normalized short name"@en ;
+  rdfs:subPropertyOf tr-common:hasNormalizedName ;
+  rdfs:subPropertyOf tr-org:hasShortName ;
+.
+tr-org:hasShortNameTransliterated
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has transliterated short name"@en ;
+  rdfs:subPropertyOf tr-common:hasTransliteratedName ;
+  rdfs:subPropertyOf tr-org:hasShortName ;
+.
+tr-org:hasSubTypeCode
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:label "Has sub-type code"@en ;
+.
+tr-org:hasTMTCompanyID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has TMT Company ID"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-org:hasTopmostPublicParent
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Organization that has a direct majority holding in this organization"@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has topmost public parent"@en ;
+  rdfs:range tr-org:Organization ;
+.
+tr-org:hasUltimateParent
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Describes an unbroken line of direct majority ownership from this organization to another."@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has ultimate parent"@en ;
+  rdfs:range tr-org:Organization ;
+.
+tr-org:hasVentureEconomicsID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has Venture Economics ID"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-org:hasWorldscopeID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has Worldscope ID"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-org:hasWorldscopeLegacyPermID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Has Worldscope Legacy Perm ID"@en ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf tr-common:hasIdentifier ;
+.
+tr-org:holdingClassificationScheme
+  rdf:type skos:ConceptScheme ;
+  rdfs:comment "A concept scheme describing types of holding."@en ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Holding classification"@en ;
+  skos:hasTopConcept tr-org:privatelyHeld ;
+  skos:hasTopConcept tr-org:publiclyHeld ;
+.
+tr-org:isAffiliatedWith
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Organization in which other organization has a percentage of holding but not more than 50%"@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Is affiliated with"@en ;
+  rdfs:range tr-org:Organization ;
+.
+tr-org:isDomiciledIn
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "The country in which an organization has its headquarters."@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Is domiciled in"@en ;
+.
+tr-org:isIncorporatedInCountry
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Indicates the country where the subject is incorporated."@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Is incorporated in country"@en ;
+  rdfs:subPropertyOf tr-org:isRegisteredIn ;
+.
+tr-org:isManaged
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Is managed"@en ;
+  rdfs:range xsd:boolean ;
+.
+tr-org:isSucceededBy
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Relation established to indicate the successor of an organization which is resultant of any type of corporate action"@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Is succeeded by"@en ;
+  rdfs:range tr-org:Organization ;
+.
+tr-org:isVerified
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Indicates that the entity was manually verified by OA operations; All mandatory field requirements must be met for this to be true."@en ;
+  rdfs:domain tr-org:Organization ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Is verified"@en ;
+  rdfs:range xsd:boolean ;
+.
+tr-org:organizationStatusScheme
+  rdf:type skos:ConceptScheme ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Organization status"@en ;
+  skos:hasTopConcept tr-org:statusActive ;
+  skos:hasTopConcept tr-org:statusInactive ;
+.
+tr-org:organizationTypeCorporate
+  rdf:type tr-org:OrganizationType ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Corporate"@en ;
+.
+tr-org:organizationTypeGovernmental
+  rdf:type tr-org:OrganizationType ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Governmental"@en ;
+.
+tr-org:organizationTypeNGO
+  rdf:type tr-org:OrganizationType ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Non-Governmental organization"@en ;
+.
+tr-org:organizationTypeScheme
+  rdf:type skos:ConceptScheme ;
+  rdfs:comment "Groups organizations into broad classifications based on their legal status or constitution."@en ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Organization type"@en ;
+  skos:hasTopConcept tr-org:organizationTypeCorporate ;
+  skos:hasTopConcept tr-org:organizationTypeGovernmental ;
+  skos:hasTopConcept tr-org:organizationTypeNGO ;
+  skos:hasTopConcept tr-org:organizationTypeSupranational ;
+.
+tr-org:organizationTypeSupranational
+  rdf:type tr-org:OrganizationType ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Supranational"@en ;
+.
+tr-org:privatelyHeld
+  rdf:type tr-org:HoldingClassification ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Privately held"@en ;
+.
+tr-org:publiclyHeld
+  rdf:type tr-org:HoldingClassification ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Publicly held"@en ;
+.
+tr-org:statusActive
+  rdf:type tr-org:OrganizationActivityStatus ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Active"@en ;
+  skos:notation "ACTIVE"^^xsd:string ;
+.
+tr-org:statusInactive
+  rdf:type tr-org:OrganizationActivityStatus ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Inactive"@en ;
+  skos:notation "INACTIVE"^^xsd:string ;
+.
+tr-org:subunitClassificationScheme
+  rdf:type skos:ConceptScheme ;
+  rdfs:isDefinedBy tr-org: ;
+  rdfs:label "Subunit classification"@en ;
+.
