@@ -1,0 +1,132 @@
+# baseURI: http://permid.org/ontology/common/
+# imports: http://creativecommons.org/schema.rdf
+# imports: http://permid.org/ontology/tr-vcard/
+# imports: http://www.w3.org/2000/01/rdf-schema
+# imports: http://www.w3.org/2004/02/skos/core
+# prefix: tr-common
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tr-common: <http://permid.org/ontology/common/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+tr-common:
+  rdf:type owl:Ontology ;
+  cc:attributionName "Thomson Reuters Open PermID"^^xsd:string ;
+  cc:attributionURL tr-common: ;
+  cc:license <http://creativecommons.org/licenses/by/4.0/> ;
+  rdfs:label "Thomson Reuters Open Perm ID common ontology"@en ;
+  owl:imports <http://creativecommons.org/schema.rdf> ;
+  owl:imports <http://permid.org/ontology/tr-vcard/> ;
+  owl:imports <http://www.w3.org/2000/01/rdf-schema> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+.
+tr-common:PublicationStatus
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "Publication status"@en ;
+  rdfs:subClassOf <http://www.w3.org/2004/02/skos/core#Concept> ;
+.
+tr-common:from
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "For a temporal object, this defines the beginning of its temporal extent; When an event or time period started."@en ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "From"@en ;
+  rdfs:range xsd:dateTime ;
+.
+tr-common:hasClassification
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Indicates that the subject has been classified according to a skos concept scheme."@en ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "Is classified as"@en ;
+  rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+.
+tr-common:hasFaxNumber
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "Has fax number"@en ;
+.
+tr-common:hasISOLanguageCode
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The subject of this property contains text described by the indicated ISO code for language, language variant or language+script code"@en ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "has language ISOCode"@en ;
+.
+tr-common:hasIdentifier
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "a code, ID, or other literal which identifies an object in a specific domain"@en ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "Has identifier"@en ;
+  rdfs:range xsd:string ;
+.
+tr-common:hasName
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "Has name"@en ;
+  rdfs:range xsd:string ;
+.
+tr-common:hasNormalizedName
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "Has normalized name"@en ;
+  rdfs:subPropertyOf tr-common:hasName ;
+.
+tr-common:hasPhoneNumber
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "Has phone number"@en ;
+.
+tr-common:hasPublicationStatus
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "Has publication status"@en ;
+  rdfs:range tr-common:PublicationStatus ;
+.
+tr-common:hasTransliteratedName
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "A version of an existing name that has been transliterated from a non-Western character set into Western Latin."^^xsd:string ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "Has transliterated name"@en ;
+  rdfs:subPropertyOf tr-common:hasName ;
+.
+tr-common:isDuplicateOf
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "Is duplicate of"@en ;
+  rdfs:subPropertyOf <http://www.w3.org/2004/02/skos/core#exactMatch> ;
+.
+tr-common:publicationStatusObsolete
+  rdf:type tr-common:PublicationStatus ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "Obsolete"@en ;
+.
+tr-common:publicationStatusPublished
+  rdf:type tr-common:PublicationStatus ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "Published"@en ;
+.
+tr-common:publicationStatusSuperseded
+  rdf:type tr-common:PublicationStatus ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "Superseded"@en ;
+.
+tr-common:publicationStatusSuspended
+  rdf:type tr-common:PublicationStatus ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "Suspended"@en ;
+.
+tr-common:to
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "For a temporal object, this defines the end of its temporal extent; when an event or time period ends."@en ;
+  rdfs:isDefinedBy tr-common: ;
+  rdfs:label "To"@en ;
+  rdfs:range xsd:dateTime ;
+.

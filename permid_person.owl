@@ -1,0 +1,334 @@
+# baseURI: http://permid.org/ontology/person/
+# imports: http://permid.org/ontology/common/
+# prefix: tr-person
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tr-person: <http://permid.org/ontology/person/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+tr-person:
+  rdf:type owl:Ontology ;
+  rdfs:label "Thomson Reuters Open Perm ID person ontology"@en ;
+  owl:imports <http://permid.org/ontology/common/> ;
+  owl:versionInfo "Created with TopBraid Composer"^^xsd:string ;
+.
+tr-person:AcademicDegree
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Academic degree"@en ;
+  rdfs:subClassOf <http://www.w3.org/2004/02/skos/core#Concept> ;
+.
+tr-person:AcademicQualification
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Academic qualification"@en ;
+  rdfs:subClassOf <http://www.w3.org/2004/02/skos/core#Concept> ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://permid.org/ontology/common/from> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://permid.org/ontology/common/hasPublicationStatus> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://permid.org/ontology/common/to> ;
+    ] ;
+.
+tr-person:DirectorRole
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Director role"@en ;
+  rdfs:subClassOf tr-person:PositionType ;
+.
+tr-person:Directorship
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Directorship"@en ;
+  rdfs:subClassOf tr-person:TenureInPosition ;
+.
+tr-person:InsiderRole
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Insider role"@en ;
+  rdfs:subClassOf tr-person:PositionType ;
+.
+tr-person:InsiderTenure
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Insider tenure"@en ;
+  rdfs:subClassOf tr-person:TenureInPosition ;
+.
+tr-person:Major
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Major"@en ;
+  rdfs:subClassOf <http://www.w3.org/2004/02/skos/core#Concept> ;
+.
+tr-person:ODOfficerID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The O&D OfficerID is a unique id given to all officers within officers and directors for the company"^^xsd:string ;
+  rdfs:domain tr-person:Person ;
+  rdfs:label "OD Officer ID"^^xsd:string ;
+  rdfs:range xsd:string ;
+.
+tr-person:ODPersonID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The O&D PersonID will be a unique id given to all unique individual within officers and directors"^^xsd:string ;
+  rdfs:domain tr-person:Person ;
+  rdfs:label "OD Person ID"^^xsd:string ;
+  rdfs:range xsd:string ;
+.
+tr-person:OfficerRole
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Officer role"@en ;
+  rdfs:subClassOf tr-person:PositionType ;
+.
+tr-person:Officership
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Officership"@en ;
+  rdfs:subClassOf tr-person:TenureInPosition ;
+.
+tr-person:Person
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Person"@en ;
+  rdfs:subClassOf <http://www.w3.org/2006/vcard/ns#Individual> ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://permid.org/ontology/common/hasPublicationStatus> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tr-person:qualifiesForPermid ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://www.w3.org/2006/vcard/ns#bday> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://www.w3.org/2006/vcard/ns#additional-name> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://www.w3.org/2006/vcard/ns#family-name> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://www.w3.org/2006/vcard/ns#fn> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://www.w3.org/2006/vcard/ns#given-name> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://www.w3.org/2006/vcard/ns#honorific-prefix> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://www.w3.org/2006/vcard/ns#honorific-suffix> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty <http://www.w3.org/2006/vcard/ns#hasGender> ;
+      owl:someValuesFrom <http://www.w3.org/2006/vcard/ns#Gender> ;
+    ] ;
+.
+tr-person:PositionType
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Position type"@en ;
+  rdfs:subClassOf <http://www.w3.org/2004/02/skos/core#Concept> ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty tr-person:hasRank ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty rdfs:label ;
+    ] ;
+.
+tr-person:TenureInOrganization
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Tenure in organization"@en ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://permid.org/ontology/common/from> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://permid.org/ontology/common/hasPublicationStatus> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://permid.org/ontology/common/to> ;
+    ] ;
+.
+tr-person:TenureInPosition
+  rdf:type owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Tenure in position"@en ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://permid.org/ontology/common/from> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://permid.org/ontology/common/hasPublicationStatus> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://permid.org/ontology/common/to> ;
+    ] ;
+.
+tr-person:fromInstitutionID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "From institution ID"@en ;
+  rdfs:range xsd:string ;
+.
+tr-person:fromInstitutionName
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-person:AcademicQualification ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "From institution name"@en ;
+  rdfs:range xsd:string ;
+.
+tr-person:hasHolder
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Has holder"@en ;
+  rdfs:range tr-person:Person ;
+.
+tr-person:hasPositionType
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-person:TenureInPosition ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Has position type"@en ;
+  rdfs:range tr-person:PositionType ;
+.
+tr-person:hasQualification
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain tr-person:Person ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Has qualification"@en ;
+  rdfs:range tr-person:AcademicQualification ;
+.
+tr-person:hasRank
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Has rank"@en ;
+  rdfs:range xsd:integer ;
+.
+tr-person:hasReportedTitle
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-person:TenureInPosition ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Has reported title"@en ;
+.
+tr-person:hasTenureInOrganization
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain tr-person:Person ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Has tenure in organization"@en ;
+  rdfs:range tr-person:TenureInOrganization ;
+.
+tr-person:holdsPosition
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-person:Person ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Holds position"@en ;
+  rdfs:range tr-person:TenureInPosition ;
+  owl:inverseOf tr-person:hasHolder ;
+.
+tr-person:inSubject
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain tr-person:AcademicQualification ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "In subject"@en ;
+  rdfs:range tr-person:Major ;
+.
+tr-person:isPositionIn
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain tr-person:TenureInPosition ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Is position in"@en ;
+  rdfs:range <http://permid.org/ontology/organization/Organization> ;
+.
+tr-person:isTenureIn
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain tr-person:TenureInOrganization ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Is tenure in"@en ;
+  rdfs:range <http://permid.org/ontology/organization/Organization> ;
+.
+tr-person:localOrgID
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Local organization ID analyst is working for as an Officer or as Director"^^xsd:string ;
+  rdfs:domain tr-person:TenureInOrganization ;
+  rdfs:label "local org ID"^^xsd:string ;
+  rdfs:range xsd:string ;
+.
+tr-person:qualifiesForPermid
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain tr-person:Person ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "Qualifies for Perm ID"@en ;
+  rdfs:range xsd:boolean ;
+.
+tr-person:withDegree
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain tr-person:AcademicQualification ;
+  rdfs:isDefinedBy tr-person: ;
+  rdfs:label "With degree"@en ;
+  rdfs:range tr-person:AcademicDegree ;
+.
+<http://permid.org/ontology/tr-vcard/date-of-death>
+  rdfs:domain tr-person:Person ;
+.
+<http://permid.org/ontology/tr-vcard/preferred-name>
+  rdfs:domain tr-person:Person ;
+.

@@ -1,0 +1,43 @@
+# baseURI: http://permid.org/ontology/tr-vcard/
+# imports: http://permid.org/ontology/common/
+# imports: http://www.w3.org/2006/vcard/ns
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tr-vcard: <http://permid.org/ontology/tr-vcard/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+tr-vcard:
+  rdf:type owl:Ontology ;
+  rdfs:label "Thomson Reuters VCard extension ontology" ;
+  owl:imports <http://permid.org/ontology/common/> ;
+  owl:imports <http://www.w3.org/2006/vcard/ns> ;
+.
+tr-vcard:date-of-death
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain <http://permid.org/ontology/person/Person> ;
+  rdfs:label "Date of death"@en ;
+  rdfs:range xsd:date ;
+  rdfs:isDefinedBy tr-vcard: ;
+.
+tr-vcard:preferred-name
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:domain <http://permid.org/ontology/person/Person> ;
+  rdfs:label "Preferred name"@en ;
+  rdfs:range xsd:string ;
+  rdfs:isDefinedBy tr-vcard: ;
+.
+vcard:Address
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://permid.org/ontology/common/hasISOLanguageCode> ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://permid.org/ontology/common/refersToPlace> ;
+    ] ;
+.
